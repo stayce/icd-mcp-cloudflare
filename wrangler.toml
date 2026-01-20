@@ -1,0 +1,16 @@
+# ICD MCP Server - Cloudflare Workers
+# WHO ICD-10 and ICD-11 Classification API
+
+name = "icd-mcp-server"
+main = "src/index.ts"
+compatibility_date = "2025-01-13"
+compatibility_flags = ["nodejs_compat"]
+
+# Set secrets via:
+#   wrangler secret put WHO_CLIENT_ID
+#   wrangler secret put WHO_CLIENT_SECRET
+
+[vars]
+ICD10_RELEASE = "2019"
+ICD11_RELEASE = "2024-01"
+WHO_API_LANGUAGE = "en"

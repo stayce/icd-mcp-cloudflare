@@ -1,0 +1,9 @@
+# WHO ICD-API Credentials
+# Register at https://icd.who.int/icdapi to obtain these (free)
+#
+# For local development, copy this file to .dev.vars
+# For production, use: wrangler secret put WHO_CLIENT_ID
+#                      wrangler secret put WHO_CLIENT_SECRET
+
+WHO_CLIENT_ID=your_client_id_here
+WHO_CLIENT_SECRET=your_client_secret_here

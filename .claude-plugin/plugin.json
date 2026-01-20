@@ -1,0 +1,40 @@
+{
+  "name": "ICD Classification",
+  "description": "Access WHO ICD-10 and ICD-11 (International Classification of Diseases) codes for diagnosis and procedure coding. ICD is the global standard for recording health conditions and causes of death.",
+  "version": "1.0.0",
+  "author": {
+    "name": "@stayce",
+    "url": "https://github.com/stayce"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/stayce/icd-mcp-cloudflare"
+  },
+  "mcp": {
+    "type": "remote",
+    "transport": "streamable-http",
+    "url": "https://icd-mcp-server.staycek.workers.dev/mcp"
+  },
+  "categories": [
+    "Healthcare",
+    "Life Sciences",
+    "Medical Coding"
+  ],
+  "tools": [
+    {
+      "name": "icd",
+      "description": "Access WHO ICD-10/ICD-11 classification with actions: lookup, search, chapters, children, api, help"
+    }
+  ],
+  "keywords": [
+    "icd",
+    "icd-10",
+    "icd-11",
+    "who",
+    "healthcare",
+    "diagnosis",
+    "medical coding",
+    "classification"
+  ],
+  "license": "MIT"
+}
