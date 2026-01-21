@@ -1,20 +1,16 @@
 {
   "$schema": "https://static.modelcontextprotocol.io/schemas/2025-12-11/server.schema.json",
   "name": "io.github.stayce/icd-mcp",
-  "description": "Access WHO ICD-10 and ICD-11 (International Classification of Diseases) codes for diagnosis and medical coding. Supports lookup, search, chapter browsing, and hierarchy navigation through both classification versions via the official WHO API.",
+  "description": "WHO ICD-10/ICD-11 diagnosis codes. Lookup, search, chapters via official WHO API.",
   "repository": {
     "url": "https://github.com/stayce/icd-mcp-cloudflare",
     "source": "github"
   },
   "version": "1.0.0",
-  "packages": [
+  "remotes": [
     {
-      "registryType": "url",
-      "identifier": "https://icd-mcp-server.staycek.workers.dev/mcp",
-      "transport": {
-        "type": "streamable-http",
-        "url": "https://icd-mcp-server.staycek.workers.dev/mcp"
-      }
+      "type": "streamable-http",
+      "url": "https://icd-mcp-server.staycek.workers.dev/mcp"
     }
   ]
 }
