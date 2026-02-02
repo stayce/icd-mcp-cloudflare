@@ -2,7 +2,7 @@
 
 A Model Context Protocol (MCP) server for the **WHO ICD-10 and ICD-11** classification systems, deployed on Cloudflare Workers.
 
-**Live URL:** `https://icd-mcp-server.staycek.workers.dev/mcp`
+**Live URL:** `https://mcp-icd.medseal.app/mcp`
 
 ## Features
 
@@ -33,7 +33,7 @@ Add to your Claude Desktop config:
   "mcpServers": {
     "icd": {
       "type": "url",
-      "url": "https://icd-mcp-server.staycek.workers.dev/mcp"
+      "url": "https://mcp-icd.medseal.app/mcp"
     }
   }
 }

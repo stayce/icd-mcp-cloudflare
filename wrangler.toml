@@ -14,3 +14,15 @@ compatibility_flags = ["nodejs_compat"]
 ICD10_RELEASE = "2019"
 ICD11_RELEASE = "2024-01"
 WHO_API_LANGUAGE = "en"
+
+# Development environment
+[env.dev]
+name = "icd-mcp-server-dev"
+
+# Production environment with custom domain
+[env.production]
+name = "icd-mcp-server"
+vars = { ICD10_RELEASE = "2019", ICD11_RELEASE = "2024-01", WHO_API_LANGUAGE = "en" }
+routes = [
+  { pattern = "mcp-icd.medseal.app", custom_domain = true }
+]
