@@ -17,8 +17,9 @@ export interface Env {
   WHO_API_LANGUAGE?: string;
 }
 
-// MCP Tool result type
+// MCP Tool result type (index signature required by SDK)
 export interface ToolResult {
+  [key: string]: unknown;
   content: Array<{ type: "text"; text: string }>;
   isError?: boolean;
 }
