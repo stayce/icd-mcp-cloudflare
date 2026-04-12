@@ -1,7 +1,7 @@
 {
   "$schema": "https://static.modelcontextprotocol.io/schemas/2025-12-11/server.schema.json",
   "name": "io.github.stayce/icd-mcp",
-  "description": "WHO ICD-10/ICD-11 diagnosis codes. Lookup, search, chapters via official WHO API.",
+  "description": "WHO ICD-10/ICD-11 classification with 12 actions: autocode clinical text to codes, lookup, search, browse hierarchy, validate, coding rules, and more via official WHO API.",
   "repository": {
     "url": "https://github.com/stayce/icd-mcp-cloudflare",
     "source": "github"
