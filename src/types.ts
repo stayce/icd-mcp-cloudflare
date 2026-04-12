@@ -55,6 +55,14 @@ export interface ICDChapter {
   uri: string;
 }
 
+// ICD Autocode Result
+export interface ICDAutocodeResult {
+  code: string;
+  title: string;
+  score?: number;
+  uri: string;
+}
+
 // WHO Client Config
 export interface WHOClientConfig {
   clientId: string;
@@ -66,13 +74,17 @@ export interface WHOClientConfig {
 
 // ICD action schema - single tool with action dispatch
 export const ICDParams = z.object({
-  action: z.enum(["lookup", "search", "chapters", "children", "api", "help"]),
+  action: z.enum([
+    "lookup", "search", "autocode", "browse", "chapters", "children",
+    "ancestors", "validate", "coding_rules", "overview", "api", "help",
+  ]),
   code: z.string().optional().describe("ICD code (e.g., A00, J18.9, BA00)"),
-  query: z.string().optional().describe("Search terms (ICD-11 only)"),
+  query: z.string().optional().describe("Search terms or clinical description"),
   version: z.enum(["10", "11"]).optional().describe("ICD version: 10 or 11 (default: 11)"),
   chapter: z.string().optional().describe("Chapter code to filter by"),
   max_results: z.number().optional().describe("Maximum results (default 10)"),
   path: z.string().optional().describe("API path for raw requests"),
+  topic: z.string().optional().describe("Coding rules topic (e.g., extension_codes, clustering, sequencing, dagger_asterisk)"),
 });
 
 export type ICDParamsType = z.infer<typeof ICDParams>;

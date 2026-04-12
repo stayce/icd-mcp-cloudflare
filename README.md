@@ -7,7 +7,12 @@ A Model Context Protocol (MCP) server for the **WHO ICD-10 and ICD-11** classifi
 ## Features
 
 - **ICD-10** and **ICD-11** support via official WHO ICD-API
-- Single tool with 6 actions (token efficient)
+- Single tool with 12 actions (token efficient)
+- **Autocode**: free-text clinical descriptions → ICD-11 codes
+- **Browse**: interactive classification hierarchy navigation
+- **Ancestors**: walk up from any code to its chapter root
+- **Validate**: quick code validity checks
+- **Coding rules**: built-in reference for extension codes, clustering, sequencing, and more
 - Global edge deployment on Cloudflare Workers
 - Same credentials as ICF MCP Server
 
@@ -17,10 +22,16 @@ A Model Context Protocol (MCP) server for the **WHO ICD-10 and ICD-11** classifi
 |--------|---------|--------|--------|
 | `lookup` | Get code details | Yes | Yes |
 | `search` | Find codes by keyword | No* | Yes |
+| `autocode` | Clinical text → code | No | Yes |
+| `browse` | Navigate hierarchy | Yes | Yes |
 | `chapters` | List chapters | Yes | Yes |
 | `children` | Get subcodes | Yes | Yes |
+| `ancestors` | Walk up to chapter | Yes | Yes |
+| `validate` | Check code validity | Yes | Yes |
+| `coding_rules` | Coding conventions | Yes | Yes |
+| `overview` | Classification summary | Yes | Yes |
 | `api` | Raw WHO API | Yes | Yes |
-| `help` | Documentation | Yes | Yes |
+| `help` | Documentation | - | - |
 
 *ICD-10 search not supported by WHO API
 
@@ -72,9 +83,21 @@ Note: This requires WHO API credentials to be set on the server. For personal us
 {"action": "lookup", "code": "J18.9", "version": "10"}
 {"action": "search", "query": "pneumonia"}
 {"action": "search", "query": "diabetes", "chapter": "05"}
+{"action": "autocode", "query": "acute bronchitis with fever"}
+{"action": "autocode", "query": "patient presents with chest pain and shortness of breath"}
+{"action": "browse"}
+{"action": "browse", "code": "BA00"}
 {"action": "chapters"}
 {"action": "chapters", "version": "10"}
 {"action": "children", "code": "BA00"}
+{"action": "ancestors", "code": "BA01.0"}
+{"action": "validate", "code": "BA00"}
+{"action": "validate", "code": "Z99", "version": "10"}
+{"action": "coding_rules"}
+{"action": "coding_rules", "topic": "extension_codes"}
+{"action": "coding_rules", "topic": "clustering"}
+{"action": "overview"}
+{"action": "overview", "version": "10"}
 {"action": "api", "path": "/icd/release/11/2024-01/mms"}
 {"action": "help"}
 ```

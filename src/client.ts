@@ -5,7 +5,7 @@
  * API Documentation: https://icd.who.int/docs/icd-api/APIDoc-Version2/
  */
 
-import { WHOClientConfig, ICDEntity, ICDSearchResult, ICDChapter } from "./types";
+import { WHOClientConfig, ICDEntity, ICDSearchResult, ICDChapter, ICDAutocodeResult } from "./types";
 
 const TOKEN_ENDPOINT = "https://icdaccessmanagement.who.int/connect/token";
 const API_BASE_URL = "https://id.who.int";
@@ -256,6 +256,108 @@ export class WHOICDClient {
       }
     }
     return chapters;
+  }
+
+  /**
+   * Autocode free-text clinical description to ICD-11
+   */
+  async autocodeICD11(text: string): Promise<ICDAutocodeResult | null> {
+    try {
+      const data = await this.apiRequest<{
+        destinationEntities?: Array<{
+          theCode?: string;
+          title?: string;
+          score?: number;
+          id?: string;
+        }>;
+        error?: boolean;
+      }>(`/icd/release/11/${this.icd11Release}/mms/autocode`, { q: text });
+
+      if (data.error || !data.destinationEntities || data.destinationEntities.length === 0) {
+        return null;
+      }
+
+      const best = data.destinationEntities[0];
+      return {
+        code: best.theCode || "",
+        title: best.title || "",
+        score: best.score,
+        uri: best.id || "",
+      };
+    } catch (error) {
+      console.warn(`Autocode failed for "${text}":`, error);
+      return null;
+    }
+  }
+
+  /**
+   * Get ICD-11 block-level children (for browse — fetches entity by URI path)
+   */
+  async getICD11BlockChildren(entityUri: string): Promise<ICDEntity[]> {
+    const entity = await this.getEntityByUri(entityUri);
+    if (!entity || !entity.children) return [];
+
+    const children: ICDEntity[] = [];
+    for (const childUri of entity.children.slice(0, 30)) {
+      const child = await this.getEntityByUri(childUri);
+      if (child) children.push(child);
+    }
+    return children;
+  }
+
+  /**
+   * Get ancestors (lineage) of an ICD-11 code up to the chapter root
+   */
+  async getICD11Ancestors(code: string): Promise<ICDEntity[]> {
+    const entity = await this.getICD11Code(code);
+    if (!entity) return [];
+
+    const ancestors: ICDEntity[] = [entity];
+    let current = entity;
+    let depth = 0;
+
+    while (current.parent && depth < 10) {
+      const parentEntity = await this.getEntityByUri(current.parent);
+      if (!parentEntity || parentEntity.code === current.code) break;
+      ancestors.push(parentEntity);
+      current = parentEntity;
+      depth++;
+    }
+
+    return ancestors;
+  }
+
+  /**
+   * Get ancestors (lineage) of an ICD-10 code
+   */
+  async getICD10Ancestors(code: string): Promise<ICDEntity[]> {
+    const entity = await this.getICD10Code(code);
+    if (!entity) return [];
+
+    const ancestors: ICDEntity[] = [entity];
+    let current = entity;
+    let depth = 0;
+
+    while (current.parent && depth < 10) {
+      const parentEntity = await this.getEntityByUri(current.parent);
+      if (!parentEntity || parentEntity.code === current.code) break;
+      ancestors.push(parentEntity);
+      current = parentEntity;
+      depth++;
+    }
+
+    return ancestors;
+  }
+
+  /**
+   * Validate an ICD code exists and return basic info
+   */
+  async validateCode(code: string, version: string): Promise<{ valid: boolean; entity?: ICDEntity }> {
+    const entity = version === "10"
+      ? await this.getICD10Code(code)
+      : await this.getICD11Code(code);
+
+    return { valid: entity !== null, entity: entity || undefined };
   }
 
   /**

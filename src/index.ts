@@ -60,7 +60,10 @@ function healthResponse(): Response {
       },
       tool: {
         name: "icd",
-        actions: ["lookup", "search", "chapters", "children", "api", "help"],
+        actions: [
+          "lookup", "search", "autocode", "browse", "chapters", "children",
+          "ancestors", "validate", "coding_rules", "overview", "api", "help",
+        ],
       },
       documentation: "https://icd.who.int/icdapi",
     }),
