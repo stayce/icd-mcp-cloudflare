@@ -1,6 +1,6 @@
 {
   "name": "icd-classification",
-  "description": "Access WHO ICD-10 and ICD-11 (International Classification of Diseases) codes for diagnosis and procedure coding. ICD is the global standard for recording health conditions and causes of death.",
+  "description": "WHO ICD-10/ICD-11 classification with 12 actions: autocode clinical text to diagnosis codes, lookup, search, browse hierarchy, trace code lineage, validate codes, coding rules reference, and more. The global standard for recording health conditions and causes of death.",
   "version": "1.0.0",
   "author": {
     "name": "@stayce",
