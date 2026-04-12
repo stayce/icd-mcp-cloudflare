@@ -1,11 +1,26 @@
 {
   "name": "icd-mcp-cloudflare",
   "version": "1.0.0",
-  "description": "WHO ICD-10/ICD-11 MCP Server for Cloudflare Workers",
+  "description": "WHO ICD-10/ICD-11 MCP Server for Cloudflare Workers — autocode, lookup, search, browse, validate, and more",
   "type": "module",
+  "keywords": [
+    "mcp",
+    "icd",
+    "icd-10",
+    "icd-11",
+    "who",
+    "healthcare",
+    "medical-coding",
+    "diagnosis-codes",
+    "clinical-coding",
+    "health-informatics",
+    "cloudflare-workers",
+    "model-context-protocol"
+  ],
   "scripts": {
     "dev": "wrangler dev",
-    "deploy": "wrangler deploy"
+    "deploy": "wrangler deploy",
+    "typecheck": "tsc --noEmit"
   },
   "dependencies": {
     "@modelcontextprotocol/sdk": "1.25.2",
