@@ -4,6 +4,7 @@ Give any AI assistant instant access to the **WHO ICD-10 and ICD-11** classifica
 
 **12 actions. Both ICD versions. One tool call.**
 
+[![CI](https://github.com/stayce/icd-mcp-cloudflare/actions/workflows/ci.yml/badge.svg)](https://github.com/stayce/icd-mcp-cloudflare/actions/workflows/ci.yml)
 [![MCP](https://img.shields.io/badge/MCP-compatible-blue)](https://modelcontextprotocol.io)
 [![Cloudflare Workers](https://img.shields.io/badge/Cloudflare-Workers-orange)](https://workers.cloudflare.com)
 [![License: MIT](https://img.shields.io/badge/License-MIT-green.svg)](LICENSE)

@@ -29,7 +29,11 @@ function createServer(env: Env) {
   });
 
   // Single tool with action dispatch
-  server.tool("icd", ICDParams.shape, async (args) => {
+  server.tool(
+    "icd",
+    "WHO ICD-10/ICD-11 classification — autocode clinical text, lookup codes, search, browse hierarchy, validate, coding rules, and more",
+    ICDParams.shape,
+    async (args) => {
     if (!env.WHO_CLIENT_ID || !env.WHO_CLIENT_SECRET) {
       return {
         content: [{ type: "text" as const, text: "Error: WHO API credentials not configured" }],

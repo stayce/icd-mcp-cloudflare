@@ -10,7 +10,7 @@
   "mcpServers": {
     "icd": {
       "type": "http",
-      "url": "https://icd-mcp-server.staycek.workers.dev/mcp"
+      "url": "https://mcp-icd.medseal.app/mcp"
     }
   },
   "keywords": [
